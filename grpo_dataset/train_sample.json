@@ -1,0 +1,428 @@
+{
+  "data_source": "satellite_task_conflict_resolution",
+  "prompt": [
+    {
+      "role": "user",
+      "content": "\n## 🛰️ 预警卫星星座任务冲突消解场景\n\n### 任务背景\n时间窗口：2025-08-06T00:00:00\n数据集：collection_001\n\n### 导弹目标元任务需求\n共有 24 个导弹目标需要跟踪：\n\n**TGT-001_3136**: 6个时间段需要跟踪\n  - 2025-08-06 00:10:00 ~ 2025-08-06 00:15:00 (任务ID: atomic_task_002)\n  - 2025-08-06 00:15:00 ~ 2025-08-06 00:20:00 (任务ID: atomic_task_003)\n  - 2025-08-06 00:20:00 ~ 2025-08-06 00:25:00 (任务ID: atomic_task_004)\n  - 2025-08-06 00:25:00 ~ 2025-08-06 00:30:00 (任务ID: atomic_task_005)\n  - 2025-08-06 00:30:00 ~ 2025-08-06 00:35:00 (任务ID: atomic_task_006)\n  - 2025-08-06 00:35:00 ~ 2025-08-06 00:37:45 (任务ID: atomic_task_007)\n**TGT-002_7304**: 6个时间段需要跟踪\n  - 2025-08-06 00:05:00 ~ 2025-08-06 00:10:00 (任务ID: atomic_task_001)\n  - 2025-08-06 00:10:00 ~ 2025-08-06 00:15:00 (任务ID: atomic_task_002)\n  - 2025-08-06 00:15:00 ~ 2025-08-06 00:20:00 (任务ID: atomic_task_003)\n  - 2025-08-06 00:20:00 ~ 2025-08-06 00:25:00 (任务ID: atomic_task_004)\n  - 2025-08-06 00:25:00 ~ 2025-08-06 00:30:00 (任务ID: atomic_task_005)\n  - 2025-08-06 00:30:00 ~ 2025-08-06 00:35:00 (任务ID: atomic_task_006)\n**TGT-003_7770**: 4个时间段需要跟踪\n  - 2025-08-06 00:05:00 ~ 2025-08-06 00:10:00 (任务ID: atomic_task_001)\n  - 2025-08-06 00:10:00 ~ 2025-08-06 00:15:00 (任务ID: atomic_task_002)\n  - 2025-08-06 00:15:00 ~ 2025-08-06 00:20:00 (任务ID: atomic_task_003)\n  - 2025-08-06 00:20:00 ~ 2025-08-06 00:25:00 (任务ID: atomic_task_004)\n**TGT-004_9927**: 5个时间段需要跟踪\n  - 2025-08-06 00:05:00 ~ 2025-08-06 00:10:00 (任务ID: atomic_task_001)\n  - 2025-08-06 00:10:00 ~ 2025-08-06 00:15:00 (任务ID: atomic_task_002)\n  - 2025-08-06 00:15:00 ~ 2025-08-06 00:20:00 (任务ID: atomic_task_003)\n  - 2025-08-06 00:20:00 ~ 2025-08-06 00:25:00 (任务ID: atomic_task_004)\n  - 2025-08-06 00:25:00 ~ 2025-08-06 00:30:00 (任务ID: atomic_task_005)\n**TGT-005_6934**: 3个时间段需要跟踪\n  - 2025-08-06 00:05:00 ~ 2025-08-06 00:10:00 (任务ID: atomic_task_001)\n  - 2025-08-06 00:10:00 ~ 2025-08-06 00:15:00 (任务ID: atomic_task_002)\n  - 2025-08-06 00:15:00 ~ 2025-08-06 00:20:00 (任务ID: atomic_task_003)\n\n### 可用卫星观测资源\n共有 11 颗卫星可提供观测：\n**SAT-01**: 1个可见时间窗口\n  - 对TGT-002_7304: 2025-08-06 00:30:00 ~ 2025-08-06 00:35:00 (覆盖率: 0.85)\n**SAT-02**: 11个可见时间窗口\n  - 对TGT-001_3136: 2025-08-06 00:10:00 ~ 2025-08-06 00:15:00 (覆盖率: 1.00)\n  - 对TGT-001_3136: 2025-08-06 00:15:00 ~ 2025-08-06 00:20:00 (覆盖率: 1.00)\n  - 对TGT-001_3136: 2025-08-06 00:20:00 ~ 2025-08-06 00:25:00 (覆盖率: 1.00)\n  - ... 还有8个观测窗口\n**SAT-07**: 3个可见时间窗口\n  - 对TGT-004_9927: 2025-08-06 00:05:00 ~ 2025-08-06 00:10:00 (覆盖率: 1.00)\n  - 对TGT-004_9927: 2025-08-06 00:10:00 ~ 2025-08-06 00:15:00 (覆盖率: 1.00)\n  - 对TGT-005_6934: 2025-08-06 00:15:00 ~ 2025-08-06 00:20:00 (覆盖率: 1.00)\n**SAT-08**: 1个可见时间窗口\n  - 对TGT-005_6934: 2025-08-06 00:05:00 ~ 2025-08-06 00:10:00 (覆盖率: 1.00)\n**SAT-10**: 1个可见时间窗口\n  - 对TGT-002_7304: 2025-08-06 00:05:00 ~ 2025-08-06 00:10:00 (覆盖率: 0.89)\n**SAT-14**: 3个可见时间窗口\n  - 对TGT-003_7770: 2025-08-06 00:10:00 ~ 2025-08-06 00:15:00 (覆盖率: 1.00)\n  - 对TGT-003_7770: 2025-08-06 00:15:00 ~ 2025-08-06 00:20:00 (覆盖率: 1.00)\n  - 对TGT-003_7770: 2025-08-06 00:20:00 ~ 2025-08-06 00:25:00 (覆盖率: 1.00)\n**SAT-16**: 2个可见时间窗口\n  - 对TGT-001_3136: 2025-08-06 00:30:00 ~ 2025-08-06 00:35:00 (覆盖率: 1.00)\n  - 对TGT-001_3136: 2025-08-06 00:35:00 ~ 2025-08-06 00:37:45 (覆盖率: 1.00)\n**SAT-17**: 9个可见时间窗口\n  - 对TGT-001_3136: 2025-08-06 00:20:00 ~ 2025-08-06 00:25:00 (覆盖率: 1.00)\n  - 对TGT-001_3136: 2025-08-06 00:25:00 ~ 2025-08-06 00:30:00 (覆盖率: 1.00)\n  - 对TGT-002_7304: 2025-08-06 00:05:00 ~ 2025-08-06 00:10:00 (覆盖率: 1.00)\n  - ... 还有6个观测窗口\n**SAT-18**: 4个可见时间窗口\n  - 对TGT-001_3136: 2025-08-06 00:15:00 ~ 2025-08-06 00:20:00 (覆盖率: 0.85)\n  - 对TGT-004_9927: 2025-08-06 00:10:00 ~ 2025-08-06 00:15:00 (覆盖率: 1.00)\n  - 对TGT-005_6934: 2025-08-06 00:10:00 ~ 2025-08-06 00:15:00 (覆盖率: 1.00)\n  - ... 还有1个观测窗口\n**SAT-23**: 1个可见时间窗口\n  - 对TGT-003_7770: 2025-08-06 00:15:00 ~ 2025-08-06 00:20:00 (覆盖率: 1.00)\n**SAT-24**: 3个可见时间窗口\n  - 对TGT-003_7770: 2025-08-06 00:05:00 ~ 2025-08-06 00:10:00 (覆盖率: 1.00)\n  - 对TGT-005_6934: 2025-08-06 00:05:00 ~ 2025-08-06 00:10:00 (覆盖率: 1.00)\n  - 对TGT-005_6934: 2025-08-06 00:10:00 ~ 2025-08-06 00:15:00 (覆盖率: 0.92)\n\n## 🎯 任务目标\n为每个导弹目标的元任务分配最优的卫星观测资源，实现冲突消解和资源优化。\n\n## 📋 优化要求\n1. **双卫星覆盖原则**: 每个元任务需要至少2颗卫星同时观测才算成功覆盖\n2. **覆盖率最大化**: 优先选择覆盖率高的观测窗口\n3. **GDOP最小化**: 选择几何精度衰减因子最小的卫星组合\n4. **时间窗口匹配**: 确保卫星观测时间与导弹元任务时间重叠\n\n## 🔧 分配策略\n请按以下步骤进行优化：\n\n1. **分析阶段**: 识别所有可能的卫星-目标观测组合\n2. **冲突检测**: 发现资源冲突（同一卫星同时观测多个目标）\n3. **优化分配**: 基于覆盖率和GDOP值进行最优分配\n4. **验证阶段**: 确保每个元任务都有双卫星覆盖\n\n## 📤 输出格式要求\n请严格按照以下JSON格式输出分配结果：\n\n```json\n{\n  \"optimization_result\": {\n    \"total_meta_tasks\": 24,\n    \"successfully_covered\": 0,\n    \"coverage_rate\": 0.0,\n    \"average_gdop\": 0.0,\n    \"assignments\": [\n      {\n        \"meta_task_id\": \"atomic_task_xxx\",\n        \"missile_id\": \"PoolMissile_xxx\",\n        \"time_window\": \"2025-08-06 HH:MM:SS ~ 2025-08-06 HH:MM:SS\",\n        \"assigned_satellites\": [\n          {\n            \"satellite_id\": \"SatelliteXX\",\n            \"coverage_ratio\": 0.xx,\n            \"gdop_value\": 0.xx\n          }\n        ],\n        \"is_successfully_covered\": false,\n        \"coverage_quality\": \"poor|fair|good|excellent\"\n      }\n    ]\n  }\n}\n```\n\n请开始进行卫星任务冲突消解优化分析和分配。"
+    }
+  ],
+  "ability": "satellite_task_optimization",
+  "reward_model": {
+    "style": "rule",
+    "ground_truth": {
+      "total_meta_tasks": 24,
+      "successfully_covered": 14,
+      "coverage_rate": 0.5833333333333334,
+      "average_gdop": 1.013243243243243,
+      "assignments": [
+        {
+          "meta_task_id": "atomic_task_002",
+          "missile_id": "PoolMissile_001_3136",
+          "time_window": "2025-08-06 00:10:00 ~ 2025-08-06 00:15:00",
+          "assigned_satellites": [
+            {
+              "satellite_id": "Satellite02",
+              "coverage_ratio": 1.0,
+              "gdop_value": 1.0
+            }
+          ],
+          "is_successfully_covered": false,
+          "coverage_quality": "poor"
+        },
+        {
+          "meta_task_id": "atomic_task_003",
+          "missile_id": "PoolMissile_001_3136",
+          "time_window": "2025-08-06 00:15:00 ~ 2025-08-06 00:20:00",
+          "assigned_satellites": [
+            {
+              "satellite_id": "Satellite02",
+              "coverage_ratio": 1.0,
+              "gdop_value": 1.0
+            },
+            {
+              "satellite_id": "Satellite18",
+              "coverage_ratio": 0.8466666666666667,
+              "gdop_value": 1.1533333333333333
+            }
+          ],
+          "is_successfully_covered": true,
+          "coverage_quality": "excellent"
+        },
+        {
+          "meta_task_id": "atomic_task_004",
+          "missile_id": "PoolMissile_001_3136",
+          "time_window": "2025-08-06 00:20:00 ~ 2025-08-06 00:25:00",
+          "assigned_satellites": [
+            {
+              "satellite_id": "Satellite02",
+              "coverage_ratio": 1.0,
+              "gdop_value": 1.0
+            },
+            {
+              "satellite_id": "Satellite17",
+              "coverage_ratio": 1.0,
+              "gdop_value": 1.0
+            }
+          ],
+          "is_successfully_covered": true,
+          "coverage_quality": "excellent"
+        },
+        {
+          "meta_task_id": "atomic_task_005",
+          "missile_id": "PoolMissile_001_3136",
+          "time_window": "2025-08-06 00:25:00 ~ 2025-08-06 00:30:00",
+          "assigned_satellites": [
+            {
+              "satellite_id": "Satellite02",
+              "coverage_ratio": 1.0,
+              "gdop_value": 1.0
+            },
+            {
+              "satellite_id": "Satellite17",
+              "coverage_ratio": 1.0,
+              "gdop_value": 1.0
+            }
+          ],
+          "is_successfully_covered": true,
+          "coverage_quality": "excellent"
+        },
+        {
+          "meta_task_id": "atomic_task_006",
+          "missile_id": "PoolMissile_001_3136",
+          "time_window": "2025-08-06 00:30:00 ~ 2025-08-06 00:35:00",
+          "assigned_satellites": [
+            {
+              "satellite_id": "Satellite02",
+              "coverage_ratio": 1.0,
+              "gdop_value": 1.0
+            },
+            {
+              "satellite_id": "Satellite16",
+              "coverage_ratio": 1.0,
+              "gdop_value": 1.0
+            }
+          ],
+          "is_successfully_covered": true,
+          "coverage_quality": "excellent"
+        },
+        {
+          "meta_task_id": "atomic_task_007",
+          "missile_id": "PoolMissile_001_3136",
+          "time_window": "2025-08-06 00:35:00 ~ 2025-08-06 00:37:45",
+          "assigned_satellites": [
+            {
+              "satellite_id": "Satellite02",
+              "coverage_ratio": 1.0,
+              "gdop_value": 1.0
+            },
+            {
+              "satellite_id": "Satellite16",
+              "coverage_ratio": 1.0,
+              "gdop_value": 1.0
+            }
+          ],
+          "is_successfully_covered": true,
+          "coverage_quality": "excellent"
+        },
+        {
+          "meta_task_id": "atomic_task_001",
+          "missile_id": "PoolMissile_002_7304",
+          "time_window": "2025-08-06 00:05:00 ~ 2025-08-06 00:10:00",
+          "assigned_satellites": [
+            {
+              "satellite_id": "Satellite17",
+              "coverage_ratio": 1.0,
+              "gdop_value": 1.0
+            },
+            {
+              "satellite_id": "Satellite10",
+              "coverage_ratio": 0.89,
+              "gdop_value": 1.1099999999999999
+            }
+          ],
+          "is_successfully_covered": true,
+          "coverage_quality": "excellent"
+        },
+        {
+          "meta_task_id": "atomic_task_002",
+          "missile_id": "PoolMissile_002_7304",
+          "time_window": "2025-08-06 00:10:00 ~ 2025-08-06 00:15:00",
+          "assigned_satellites": [
+            {
+              "satellite_id": "Satellite17",
+              "coverage_ratio": 1.0,
+              "gdop_value": 1.0
+            }
+          ],
+          "is_successfully_covered": false,
+          "coverage_quality": "poor"
+        },
+        {
+          "meta_task_id": "atomic_task_003",
+          "missile_id": "PoolMissile_002_7304",
+          "time_window": "2025-08-06 00:15:00 ~ 2025-08-06 00:20:00",
+          "assigned_satellites": [
+            {
+              "satellite_id": "Satellite17",
+              "coverage_ratio": 1.0,
+              "gdop_value": 1.0
+            }
+          ],
+          "is_successfully_covered": false,
+          "coverage_quality": "poor"
+        },
+        {
+          "meta_task_id": "atomic_task_004",
+          "missile_id": "PoolMissile_002_7304",
+          "time_window": "2025-08-06 00:20:00 ~ 2025-08-06 00:25:00",
+          "assigned_satellites": [
+            {
+              "satellite_id": "Satellite17",
+              "coverage_ratio": 1.0,
+              "gdop_value": 1.0
+            }
+          ],
+          "is_successfully_covered": false,
+          "coverage_quality": "poor"
+        },
+        {
+          "meta_task_id": "atomic_task_005",
+          "missile_id": "PoolMissile_002_7304",
+          "time_window": "2025-08-06 00:25:00 ~ 2025-08-06 00:30:00",
+          "assigned_satellites": [
+            {
+              "satellite_id": "Satellite17",
+              "coverage_ratio": 1.0,
+              "gdop_value": 1.0
+            }
+          ],
+          "is_successfully_covered": false,
+          "coverage_quality": "poor"
+        },
+        {
+          "meta_task_id": "atomic_task_006",
+          "missile_id": "PoolMissile_002_7304",
+          "time_window": "2025-08-06 00:30:00 ~ 2025-08-06 00:35:00",
+          "assigned_satellites": [
+            {
+              "satellite_id": "Satellite17",
+              "coverage_ratio": 1.0,
+              "gdop_value": 1.0
+            },
+            {
+              "satellite_id": "Satellite01",
+              "coverage_ratio": 0.8533333333333334,
+              "gdop_value": 1.1466666666666665
+            }
+          ],
+          "is_successfully_covered": true,
+          "coverage_quality": "excellent"
+        },
+        {
+          "meta_task_id": "atomic_task_001",
+          "missile_id": "PoolMissile_003_7770",
+          "time_window": "2025-08-06 00:05:00 ~ 2025-08-06 00:10:00",
+          "assigned_satellites": [
+            {
+              "satellite_id": "Satellite24",
+              "coverage_ratio": 1.0,
+              "gdop_value": 1.0
+            }
+          ],
+          "is_successfully_covered": false,
+          "coverage_quality": "poor"
+        },
+        {
+          "meta_task_id": "atomic_task_002",
+          "missile_id": "PoolMissile_003_7770",
+          "time_window": "2025-08-06 00:10:00 ~ 2025-08-06 00:15:00",
+          "assigned_satellites": [
+            {
+              "satellite_id": "Satellite14",
+              "coverage_ratio": 1.0,
+              "gdop_value": 1.0
+            }
+          ],
+          "is_successfully_covered": false,
+          "coverage_quality": "poor"
+        },
+        {
+          "meta_task_id": "atomic_task_003",
+          "missile_id": "PoolMissile_003_7770",
+          "time_window": "2025-08-06 00:15:00 ~ 2025-08-06 00:20:00",
+          "assigned_satellites": [
+            {
+              "satellite_id": "Satellite14",
+              "coverage_ratio": 1.0,
+              "gdop_value": 1.0
+            },
+            {
+              "satellite_id": "Satellite23",
+              "coverage_ratio": 1.0,
+              "gdop_value": 1.0
+            }
+          ],
+          "is_successfully_covered": true,
+          "coverage_quality": "excellent"
+        },
+        {
+          "meta_task_id": "atomic_task_004",
+          "missile_id": "PoolMissile_003_7770",
+          "time_window": "2025-08-06 00:20:00 ~ 2025-08-06 00:25:00",
+          "assigned_satellites": [
+            {
+              "satellite_id": "Satellite14",
+              "coverage_ratio": 1.0,
+              "gdop_value": 1.0
+            }
+          ],
+          "is_successfully_covered": false,
+          "coverage_quality": "poor"
+        },
+        {
+          "meta_task_id": "atomic_task_001",
+          "missile_id": "PoolMissile_004_9927",
+          "time_window": "2025-08-06 00:05:00 ~ 2025-08-06 00:10:00",
+          "assigned_satellites": [
+            {
+              "satellite_id": "Satellite02",
+              "coverage_ratio": 1.0,
+              "gdop_value": 1.0
+            },
+            {
+              "satellite_id": "Satellite07",
+              "coverage_ratio": 1.0,
+              "gdop_value": 1.0
+            }
+          ],
+          "is_successfully_covered": true,
+          "coverage_quality": "excellent"
+        },
+        {
+          "meta_task_id": "atomic_task_002",
+          "missile_id": "PoolMissile_004_9927",
+          "time_window": "2025-08-06 00:10:00 ~ 2025-08-06 00:15:00",
+          "assigned_satellites": [
+            {
+              "satellite_id": "Satellite02",
+              "coverage_ratio": 1.0,
+              "gdop_value": 1.0
+            },
+            {
+              "satellite_id": "Satellite07",
+              "coverage_ratio": 1.0,
+              "gdop_value": 1.0
+            }
+          ],
+          "is_successfully_covered": true,
+          "coverage_quality": "excellent"
+        },
+        {
+          "meta_task_id": "atomic_task_003",
+          "missile_id": "PoolMissile_004_9927",
+          "time_window": "2025-08-06 00:15:00 ~ 2025-08-06 00:20:00",
+          "assigned_satellites": [
+            {
+              "satellite_id": "Satellite02",
+              "coverage_ratio": 1.0,
+              "gdop_value": 1.0
+            }
+          ],
+          "is_successfully_covered": false,
+          "coverage_quality": "poor"
+        },
+        {
+          "meta_task_id": "atomic_task_004",
+          "missile_id": "PoolMissile_004_9927",
+          "time_window": "2025-08-06 00:20:00 ~ 2025-08-06 00:25:00",
+          "assigned_satellites": [
+            {
+              "satellite_id": "Satellite02",
+              "coverage_ratio": 1.0,
+              "gdop_value": 1.0
+            },
+            {
+              "satellite_id": "Satellite17",
+              "coverage_ratio": 1.0,
+              "gdop_value": 1.0
+            }
+          ],
+          "is_successfully_covered": true,
+          "coverage_quality": "excellent"
+        },
+        {
+          "meta_task_id": "atomic_task_005",
+          "missile_id": "PoolMissile_004_9927",
+          "time_window": "2025-08-06 00:25:00 ~ 2025-08-06 00:30:00",
+          "assigned_satellites": [],
+          "is_successfully_covered": false,
+          "coverage_quality": "poor"
+        },
+        {
+          "meta_task_id": "atomic_task_001",
+          "missile_id": "PoolMissile_005_6934",
+          "time_window": "2025-08-06 00:05:00 ~ 2025-08-06 00:10:00",
+          "assigned_satellites": [
+            {
+              "satellite_id": "Satellite02",
+              "coverage_ratio": 1.0,
+              "gdop_value": 1.0
+            },
+            {
+              "satellite_id": "Satellite08",
+              "coverage_ratio": 1.0,
+              "gdop_value": 1.0
+            }
+          ],
+          "is_successfully_covered": true,
+          "coverage_quality": "excellent"
+        },
+        {
+          "meta_task_id": "atomic_task_002",
+          "missile_id": "PoolMissile_005_6934",
+          "time_window": "2025-08-06 00:10:00 ~ 2025-08-06 00:15:00",
+          "assigned_satellites": [
+            {
+              "satellite_id": "Satellite18",
+              "coverage_ratio": 1.0,
+              "gdop_value": 1.0
+            },
+            {
+              "satellite_id": "Satellite24",
+              "coverage_ratio": 0.92,
+              "gdop_value": 1.08
+            }
+          ],
+          "is_successfully_covered": true,
+          "coverage_quality": "excellent"
+        },
+        {
+          "meta_task_id": "atomic_task_003",
+          "missile_id": "PoolMissile_005_6934",
+          "time_window": "2025-08-06 00:15:00 ~ 2025-08-06 00:20:00",
+          "assigned_satellites": [
+            {
+              "satellite_id": "Satellite07",
+              "coverage_ratio": 1.0,
+              "gdop_value": 1.0
+            },
+            {
+              "satellite_id": "Satellite18",
+              "coverage_ratio": 1.0,
+              "gdop_value": 1.0
+            }
+          ],
+          "is_successfully_covered": true,
+          "coverage_quality": "excellent"
+        }
+      ]
+    }
+  },
+  "extra_info": {
+    "collection_name": "collection_001",
+    "collection_time": "2025-08-06T00:00:00",
+    "meta_tasks_count": 24,
+    "visible_tasks_count": 39,
+    "index": 0
+  }
+}
